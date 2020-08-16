@@ -36,76 +36,101 @@ namespace guessTheNumber
 
             Console.WriteLine("Hello {0}, lets play a game", playersName);
 
-            // create a random number    
-            Random random = new Random();
-
-            // set correct number
-            int correctNumber = random.Next(1, 10);
-
-            // set guess var
-            int guess = 0;
-
-            //ask user for number
-            Console.WriteLine("Guess a number between 1 and 10");
-
-
-            // loop until the player guess the correct number
-            while(guess != correctNumber)
+            while (true)
             {
-                // player guessed number
-                string guessedNumber = Console.ReadLine();
+
+                // create a random number    
+                Random random = new Random();
+
+                // set correct number
+                int correctNumber = random.Next(1, 10);
+
+                // set guess var
+                int guess = 0;
+
+                //ask user for number
+                Console.WriteLine("Guess a number between 1 and 10");
 
 
-                // force the input to be a number only
-
-                if(!int.TryParse(guessedNumber, out guess))
+                // loop until the player guess the correct number
+                while (guess != correctNumber)
                 {
-                    // changing text colour
-                    Console.ForegroundColor = ConsoleColor.Blue;
+                    // player guessed number
+                    string guessedNumber = Console.ReadLine();
 
 
-                    // log out app info
-                    Console.WriteLine("That's not a number try again.");
+                    // force the input to be a number only
 
-                    // terminal colour back to default
-                    Console.ResetColor();
+                    if (!int.TryParse(guessedNumber, out guess))
+                    {
+                        // changing text colour
+                        Console.ForegroundColor = ConsoleColor.Blue;
 
-                    // keep inside the loop
+
+                        // log out app info
+                        Console.WriteLine("That's not a number try again.");
+
+                        // terminal colour back to default
+                        Console.ResetColor();
+
+                        // keep inside the loop
+                        continue;
+                    }
+
+
+                    // cast to int and put in guess (parsing the guessed number)
+                    guess = Int32.Parse(guessedNumber);
+
+
+                    // if guessed != correct number do
+                    if (guess != correctNumber)
+                    {
+                        // changing text colour
+                        Console.ForegroundColor = ConsoleColor.Red;
+
+
+                        // log out app info
+                        Console.WriteLine("Wrong Number please try again!");
+
+                        // terminal colour back to default
+                        Console.ResetColor();
+
+                    }
+                }
+
+                // if guessed number matched
+                // changing text colour
+                Console.ForegroundColor = ConsoleColor.Yellow;
+
+
+                // log out app info
+                Console.WriteLine("Your are correct, You Win!!!");
+
+                // terminal colour back to default
+                Console.ResetColor();
+
+
+                // ask player  to play again
+                Console.WriteLine("[Play again Y/N]");
+
+                // get answer and for into upper case
+                string answer = Console.ReadLine().ToUpper();
+
+                if (answer == "Y")
+                {
                     continue;
                 }
 
-
-                // cast to int and put in guess (parsing the guessed number)
-                guess = Int32.Parse(guessedNumber);
-
-
-                // if guessed != correct number do
-                if (guess !=correctNumber)
+                else if (answer == "N")
                 {
-                    // changing text colour
-                    Console.ForegroundColor = ConsoleColor.Red;
+                    continue;
+                }
 
-
-                    // log out app info
-                    Console.WriteLine("Wrong Number please try again!");
-
-                    // terminal colour back to default
-                    Console.ResetColor();
-
-                } 
+                else
+                {
+                    return;
+                }
             }
-
-            // if guessed number matched
-            // changing text colour
-            Console.ForegroundColor = ConsoleColor.Yellow;
-
-
-            // log out app info
-            Console.WriteLine("Your are correct, You Win!!!");
-
-            // terminal colour back to default
-            Console.ResetColor();
-
         }
     }
 }

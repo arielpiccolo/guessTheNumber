@@ -13,28 +13,12 @@ namespace guessTheNumber
         static void Main(string[] args)
         {
 
-            // set app vars
-            string appName = "Guess The Number";
-            string appVersion = "1.0.0";
-            string appAuthor = "Ariel";
+            //call app details (located at the botton)
+            GetAppInfo();
 
-            // changing text colour
-            Console.ForegroundColor = ConsoleColor.Green;
+            // ask for user name and greet
+            GreetPlayer();
 
-
-            // log out app info
-            Console.WriteLine("App: {0}, Version: {1}, by {2}", appName,appVersion,appAuthor);
-
-            // terminal colour back to default
-            Console.ResetColor();
-
-            // ask players name
-            Console.WriteLine("What is your Name?");
-
-            // get players input and save it into variable playerName
-            string playersName = Console.ReadLine();
-
-            Console.WriteLine("Hello {0}, lets play a game", playersName);
 
             while (true)
             {
@@ -63,17 +47,11 @@ namespace guessTheNumber
 
                     if (!int.TryParse(guessedNumber, out guess))
                     {
-                        // changing text colour
-                        Console.ForegroundColor = ConsoleColor.Blue;
 
+                        //print error message
+                        PrintColorMessage(ConsoleColor.Red, "That is not a number, please enter a number");
 
-                        // log out app info
-                        Console.WriteLine("That's not a number try again.");
-
-                        // terminal colour back to default
-                        Console.ResetColor();
-
-                        // keep inside the loop
+                        // stay inside the loop
                         continue;
                     }
 
@@ -85,29 +63,16 @@ namespace guessTheNumber
                     // if guessed != correct number do
                     if (guess != correctNumber)
                     {
-                        // changing text colour
-                        Console.ForegroundColor = ConsoleColor.Red;
-
-
-                        // log out app info
-                        Console.WriteLine("Wrong Number please try again!");
-
-                        // terminal colour back to default
-                        Console.ResetColor();
+                        // print error message
+                        PrintColorMessage(ConsoleColor.Red, "Wrong Number please try again!");
 
                     }
                 }
 
                 // if guessed number matched
                 // changing text colour
-                Console.ForegroundColor = ConsoleColor.Yellow;
 
-
-                // log out app info
-                Console.WriteLine("Your are correct, You Win!!!");
-
-                // terminal colour back to default
-                Console.ResetColor();
+                PrintColorMessage(ConsoleColor.Yellow, "That's correct you Win!");
 
 
                 // ask player  to play again
@@ -123,7 +88,7 @@ namespace guessTheNumber
 
                 else if (answer == "N")
                 {
-                    continue;
+                    return;
                 }
 
                 else
@@ -131,6 +96,54 @@ namespace guessTheNumber
                     return;
                 }
             }
+        }
+
+
+        // Display app info 
+        static void GetAppInfo()
+        {
+            // set app vars
+            string appName = "Guess The Number";
+            string appVersion = "1.0.0";
+            string appAuthor = "Ariel";
+
+            // changing text colour
+            Console.ForegroundColor = ConsoleColor.Green;
+
+
+            // log out app info
+            Console.WriteLine("App: {0}, Version: {1}, by {2}", appName, appVersion, appAuthor);
+
+            // terminal colour back to default
+            Console.ResetColor();
+        }
+
+
+        //ask player name and greet
+        static void GreetPlayer()
+        {
+
+            // ask players name
+            Console.WriteLine("What is your Name?");
+
+            // get players input and save it into variable playerName
+            string playersName = Console.ReadLine();
+
+            Console.WriteLine("Hello {0}, lets play a game", playersName);
+        }
+
+        // print colour message
+        static void PrintColorMessage(ConsoleColor color, string message) {
+
+            // changing text colour
+            Console.ForegroundColor = color;
+
+
+            // log out app info
+            Console.WriteLine(message);
+
+            // terminal colour back to default
+            Console.ResetColor();
         }
     }
 }

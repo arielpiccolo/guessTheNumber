@@ -1,2 +1,2 @@
-# very basic guess The Number text based game - WIP -
+# very basic guess The Number text based game 
  c# / .net project
